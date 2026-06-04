@@ -1,74 +1,79 @@
-# Customer Churn Prediction Using Machine Learning
+# Customer Churn Prediction using Machine Learning
 
-## Overview
+Predicting customer churn is a critical business problem that helps companies identify customers who are likely to stop using their services. Early prediction enables businesses to implement retention strategies and reduce customer loss.
 
-Customer churn prediction is a machine learning task that aims to identify customers who are likely to stop using a service. Early churn prediction allows companies to take preventive actions and improve customer retention.
-
-This project develops and evaluates machine learning models to predict customer churn using the IBM Telco Customer Churn dataset. The project includes data preprocessing, exploratory data analysis (EDA), model training, hyperparameter tuning, and model evaluation.
+This project develops a machine learning pipeline to predict customer churn using the IBM Telco Customer Churn dataset. The workflow includes data preprocessing, exploratory data analysis (EDA), model training, hyperparameter tuning, and model evaluation.
 
 ---
 
-## Dataset
+## Project Overview
 
-Dataset: IBM Telco Customer Churn Dataset
+### Objective
 
-The dataset contains customer demographic information, subscription details, account information, and churn status.
+Predict whether a customer is likely to churn based on demographic information, account details, and subscribed services.
 
-### Target Variable
+### Dataset
 
-* Churn = 1 → Customer leaves the service
-* Churn = 0 → Customer remains with the service
+https://www.kaggle.com/code/emineyetm/telco-customer-churn?select=WA_Fn-UseC_-Telco-Customer-Churn.csv
+
+* 7,043 customer records
+* 30 predictive features
+* Binary classification target:
+
+  * 0 = Customer stays
+  * 1 = Customer churns
 
 ---
 
-## Project Workflow
+## Workflow
 
 1. Data Collection
 2. Data Cleaning
 3. Exploratory Data Analysis (EDA)
-4. Data Preprocessing
-5. Feature Encoding
+4. Feature Engineering
+5. One-Hot Encoding
 6. Train-Test Split
 7. Model Training
 8. Hyperparameter Tuning
 9. Model Evaluation
 10. Feature Importance Analysis
+11. Model Deployment Preparation
 
 ---
 
 ## Technologies Used
 
-* Python
-* Pandas
-* NumPy
-* Scikit-Learn
-* Matplotlib
-* Seaborn
-* Jupyter Notebook
+| Category                | Tools               |
+| ----------------------- | ------------------- |
+| Programming Language    | Python              |
+| Data Processing         | Pandas, NumPy       |
+| Visualization           | Matplotlib, Seaborn |
+| Machine Learning        | Scikit-Learn        |
+| Development Environment | Jupyter Notebook    |
+| Deployment              | Streamlit           |
 
 ---
 
-## Machine Learning Models
+## Models Evaluated
 
 ### Logistic Regression
 
-Used as the baseline classification model.
+| Metric    | Score  |
+| --------- | ------ |
+| Accuracy  | 80.41% |
+| Precision | 66%    |
+| Recall    | 55%    |
+| F1-Score  | 60%    |
+| ROC-AUC   | 84.25% |
 
-Performance:
+### Random Forest (Default)
 
-* Accuracy: 80.41%
-* ROC-AUC: 84.25%
+| Metric   | Score  |
+| -------- | ------ |
+| Accuracy | 78.64% |
+| ROC-AUC  | 82.51% |
 
-### Random Forest
-
-Performance before tuning:
-
-* Accuracy: 78.64%
-* ROC-AUC: 82.51%
-
-### Tuned Random Forest
-
-Hyperparameter tuning was performed using GridSearchCV.
+### Random Forest (Tuned)
 
 Best Parameters:
 
@@ -81,25 +86,7 @@ Best Parameters:
 }
 ```
 
-Performance after tuning:
-
-* Accuracy: 80.34%
-
----
-
-## Model Evaluation
-
-### Logistic Regression
-
-| Metric    | Score  |
-| --------- | ------ |
-| Accuracy  | 80.41% |
-| Precision | 66%    |
-| Recall    | 55%    |
-| F1-Score  | 60%    |
-| ROC-AUC   | 84.25% |
-
-### Tuned Random Forest
+Performance:
 
 | Metric    | Score  |
 | --------- | ------ |
@@ -110,47 +97,99 @@ Performance after tuning:
 
 ---
 
-## Key Findings
+## Feature Importance
 
-The results show that Logistic Regression slightly outperformed Random Forest on this dataset.
+Top influential features identified by the tuned Random Forest model:
 
-This suggests that customer churn behavior in the Telco dataset can be effectively captured using a relatively simple linear classification model.
+1. Tenure
+2. Total Charges
+3. Monthly Charges
+4. Internet Service (Fiber Optic)
+5. Electronic Check Payment Method
+6. Contract Type
+7. Online Security
+8. Technical Support
+
+### Key Insights
+
+* Customers with shorter tenure are more likely to churn.
+* Higher monthly charges contribute to increased churn risk.
+* Long-term contracts significantly reduce churn probability.
+* Additional services such as Online Security and Tech Support improve customer retention.
 
 ---
 
-## Repository Structure
+## Project Structure
 
 ```text
 customer-churn-prediction/
 │
+├── app/
+│   └── app.py
+│
 ├── data/
 │   └── WA_Fn-UseC_-Telco-Customer-Churn.csv
-│
-├── notebooks/
-│   └── customer_churn_prediction.ipynb
 │
 ├── models/
 │   └── churn_model.pkl
 │
-├── app/
+├── notebooks/
+│   └── customer_churn_prediction.ipynb
 │
-├── requirements.txt
 ├── README.md
+├── requirements.txt
 └── .gitignore
+```
+
+---
+
+## How to Run
+
+### Clone Repository
+
+```bash
+git clone https://github.com/mikelwp/customer-churn-prediction.git
+cd customer-churn-prediction
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### Activate Virtual Environment
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Run Streamlit App
+
+```bash
+streamlit run app/app.py
 ```
 
 ---
 
 ## Future Improvements
 
-* Streamlit Deployment
+* Streamlit Dashboard
 * SHAP Explainability
-* Feature Importance Visualization
-* Model Comparison Dashboard
 * Customer Retention Recommendation System
+* Model Monitoring
+* Cloud Deployment
 
 ---
 
 ## Author
-Michael William
 
+Michael William
