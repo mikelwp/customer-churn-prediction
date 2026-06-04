@@ -152,7 +152,5 @@ customer-churn-prediction/
 ---
 
 ## Author
+Michael William
 
-Michael Pakpahan
-
-Machine Learning and Artificial Intelligence Enthusiast
